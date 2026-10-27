@@ -1,0 +1,24 @@
+# Local and sensitive configuration
+.env
+.env.*
+!.env.example
+.DS_Store
+# Build/runtime files
+node_modules/
+dist/
+.next/
+coverage/
+.venv/
+__pycache__/
+*.pyc
+tmp/
+# Imported coursework/research snapshots and local continuity metadata
+references/
+HANDOFF.md
+
+# Local demo state
+.stayweave/
+
+# Local planning and personal workspace instructions
+docs/
+AGENTS.md
