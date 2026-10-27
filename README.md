@@ -24,7 +24,7 @@ Use the reset icon in the upper-right corner to repeat the scenario. Local demo 
 
 ## Model configuration
 
-The optional interpretation endpoint is designed for an NVIDIA Nemotron model through Nebius Token Factory. Without a key, the interface uses manual input and clearly indicates that the model is disconnected. Copy `.env.example` to `.env` and configure your own credentials locally; never commit or share your key. **Authenticated model access, inference, latency and cost have not yet been validated.** Availability, time arithmetic, inventory, staffing, pricing and approval are determined by application code, not model output.
+The optional interpretation endpoint is designed for an NVIDIA Nemotron model through Nebius Token Factory. Without a key, the interface uses manual input and clearly indicates that the model is disconnected. Copy `.env.example` to `.env` and configure your own credentials locally; never commit or share your key. **Authenticated model access, inference, latency and cost have not yet been validated.** Availability, time arithmetic, inventory, staffing, pricing and approval are determined by application code, not model output. On macOS, if you have stored a key in your Keychain under service `StayWeave-Nebius` and account `local`, start the app with `./scripts/dev-keychain.sh` to load it into the local process without writing it into the repository.
 
 ## Boundaries
 
