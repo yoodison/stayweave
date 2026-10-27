@@ -18,6 +18,7 @@ function mutation(fn){return(req,res)=>{try{const candidate=fn(structuredClone(s
 app.post('/api/offer',mutation((s,b)=>makeOffer(s,b)));
 app.post('/api/select',mutation((s,b)=>acceptOffer(s,b)));
 app.post('/api/retry',mutation(s=>retryExecution(s)));
+app.post('/api/verify',mutation(s=>{if(s.execution?.status!=='applied_unverified') throw new DomainError('There is no pending readback.');return s;}));
 app.post('/api/approve',mutation((s,b)=>approveDraft(s,b.id,b.version,b.amount)));
 app.post('/api/replay',mutation(s=>replayStaffCompletion(s)));
 app.post('/api/invalidate',mutation(s=>invalidatePlan(s)));
