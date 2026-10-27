@@ -4,7 +4,8 @@ import { aiStatus, interpret } from '../server/ai.js';
 
 const originalKey=process.env.NEBIUS_API_KEY;
 const originalFetch=globalThis.fetch;
-test.after(()=>{globalThis.fetch=originalFetch; if(originalKey===undefined) delete process.env.NEBIUS_API_KEY; else process.env.NEBIUS_API_KEY=originalKey;});
+const originalEnabled=process.env.NEBIUS_INFERENCE_ENABLED;
+test.after(()=>{if(originalEnabled===undefined) delete process.env.NEBIUS_INFERENCE_ENABLED; else process.env.NEBIUS_INFERENCE_ENABLED=originalEnabled; globalThis.fetch=originalFetch; if(originalKey===undefined) delete process.env.NEBIUS_API_KEY; else process.env.NEBIUS_API_KEY=originalKey;});
 
 test('model adapter requires credentials before calling the provider', async()=>{
   delete process.env.NEBIUS_API_KEY;
@@ -12,8 +13,14 @@ test('model adapter requires credentials before calling the provider', async()=>
   assert.equal(aiStatus().configured,false);
 });
 
+test('model calls stay paused until explicitly enabled', async()=>{
+  process.env.NEBIUS_API_KEY='test-key'; delete process.env.NEBIUS_INFERENCE_ENABLED;
+  await assert.rejects(interpret('Request'), /paused/);
+  assert.equal(aiStatus().inferenceEnabled,false);
+});
+
 test('model adapter validates structured results and records a successful response', async()=>{
-  process.env.NEBIUS_API_KEY='test-key';
+  process.env.NEBIUS_API_KEY='test-key'; process.env.NEBIUS_INFERENCE_ENABLED='true';
   globalThis.fetch=async(url,opts)=>{
     assert.equal(url,'https://api.tokenfactory.nebius.com/v1/chat/completions');
     assert.equal(JSON.parse(opts.body).response_format.type,'json_object');
@@ -26,7 +33,7 @@ test('model adapter validates structured results and records a successful respon
 });
 
 test('malformed provider output cannot become a valid request', async()=>{
-  process.env.NEBIUS_API_KEY='test-key';
+  process.env.NEBIUS_API_KEY='test-key'; process.env.NEBIUS_INFERENCE_ENABLED='true';
   globalThis.fetch=async()=>({ok:true,json:async()=>({choices:[{message:{content:'null'}}]})});
   await assert.rejects(interpret('Request'),/invalid request/);
   globalThis.fetch=async()=>({ok:true,json:async()=>({choices:[{message:{content:'not JSON'}}]})});
