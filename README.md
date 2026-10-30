@@ -6,7 +6,7 @@ Nebius × NVIDIA Global AI Hackathon · **Best Apps and Agents** track · MIT li
 
 | | |
 |---|---|
-| Live demo (judges) | https://audit-nursing-charging-rica.trycloudflare.com/?demo=1 — see availability note below |
+| Live demo (judges) | https://stayweave.onrender.com/?demo=1 — free hosting: the first visit after idle takes about a minute to wake |
 | Demo video | YouTube link in the Devpost submission (2:40) |
 | Model | `nvidia/Nemotron-3.5-Super-VL` via Nebius Token Factory (OpenAI-compatible API) |
 
@@ -38,7 +38,7 @@ Guest explicitly chooses current terms ──▶ atomic ledger write: reservatio
 
 If no room satisfies every required constraint, the planner says so rather than inventing an offer. Demo data is synthetic. OTA/PMS write-back, payments and outbound messages are **not** connected (channel adapters are simulated).
 
-**Availability note:** the demo is served from the author's machine through a Cloudflare tunnel; if it is unreachable, run it locally as below (about two minutes).
+**Availability note:** the demo runs on Render's free tier (Docker, this repository's `Dockerfile`). It sleeps after 15 minutes without traffic, so the first request can take about a minute; demo state resets when it restarts. If it is unreachable, run it locally as below (about two minutes).
 
 ## Run locally
 
@@ -52,7 +52,7 @@ npm run build && npm start      # http://127.0.0.1:3001/?demo=1
 npm test                        # 119 tests
 ```
 
-Without a key the app still runs; the chat reports that the model is disconnected. To expose a local server through a Cloudflare quick tunnel, start it with `STAYWEAVE_PUBLIC_HOST_SUFFIX=.trycloudflare.com` (otherwise only localhost requests are accepted).
+Without a key the app still runs; the chat reports that the model is disconnected. To serve it on a public host, set `STAYWEAVE_PUBLIC_HOST_SUFFIX` to that host's suffix (comma-separated, e.g. `.onrender.com`); otherwise only localhost requests are accepted. `docker build -t stayweave . && docker run -p 8080:8080 -e NEBIUS_API_KEY=... -e NEBIUS_INFERENCE_ENABLED=true -e STAYWEAVE_PUBLIC_HOST_SUFFIX=localhost stayweave` runs the production image.
 
 ## Built during the submission period
 
