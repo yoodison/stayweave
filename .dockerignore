@@ -1,0 +1,13 @@
+node_modules
+dist
+.stayweave
+.env
+.env.*
+docs
+references
+video
+test
+.git
+.21st
+.agents
+*.log

@@ -19,8 +19,8 @@ app.use((req,res,next)=>{
   let host,origin;
   try{host=new URL(`http://${req.headers.host}`).hostname;origin=req.headers.origin?new URL(req.headers.origin):null;}catch{return res.status(403).json({error:'Invalid local origin.'});}
   // Opt-in judge demo: STAYWEAVE_PUBLIC_HOST_SUFFIX=.trycloudflare.com accepts that tunnel's own same-origin requests.
-  const suffix=process.env.STAYWEAVE_PUBLIC_HOST_SUFFIX;
-  const isPublic=(h)=>Boolean(suffix)&&h.endsWith(suffix);
+  const suffixes=(process.env.STAYWEAVE_PUBLIC_HOST_SUFFIX||'').split(',').map(s=>s.trim()).filter(Boolean);
+  const isPublic=(h)=>suffixes.some(s=>h.endsWith(s));
   if(isPublic(host)&&(!origin||origin.hostname===host)){}
   else if(!allowedHosts.includes(host)||(origin&&(!allowedHosts.includes(origin.hostname)||!['5173','3001',String(process.env.PORT||3001)].includes(origin.port))))return res.status(403).json({error:'This prototype accepts local requests only.'});
   if(!['GET','HEAD'].includes(req.method)&&!req.is('application/json'))return res.status(415).json({error:'Use application/json.'});
