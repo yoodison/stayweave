@@ -1,0 +1,120 @@
+{
+  "version": 1,
+  "project": {
+    "name": "stayweave",
+    "productType": "hospitality operations",
+    "stack": [
+      "react",
+      "vite"
+    ]
+  },
+  "sources": {
+    "tokens": [],
+    "components": [],
+    "assets": [],
+    "instructions": [
+      "AGENTS.md"
+    ]
+  },
+  "design": {
+    "colorMode": "light warm spatial workspace",
+    "colors": {
+      "canvas": "#f7f8f2",
+      "ink": "#293d31",
+      "accent": "#365c43",
+      "line": "#e2e7db"
+    },
+    "typography": {},
+    "spacing": {},
+    "radius": {},
+    "shadows": {},
+    "motion": {},
+    "density": "balanced"
+  },
+  "components": {
+    "installed": [],
+    "preferredPrimitives": [],
+    "patterns": []
+  },
+  "constraints": {
+    "must": [
+      "Show guest context, current commitments and feasible choices together",
+      "Distinguish proposed work from verified updates and physical completion",
+      "Keep simulated data and external-action boundaries clear",
+      "Preserve keyboard and mobile access"
+    ],
+    "avoid": [
+      "Judging guests by age, profession or the moral value of their stories",
+      "Suggesting a booking or purchase was completed when it is only a preview"
+    ]
+  },
+  "decisions": [
+    {
+      "decision": "Guest request leads into a connected plan, with room readiness and guest choices visible before action.",
+      "reason": "Show the effect of each stay on the whole property and make context-specific options understandable at a glance."
+    },
+    {
+      "decision": "Primary navigation is an interactive translucent isometric property cutaway with room actions, unified inbound requests and connected resource counters.",
+      "reason": "Human request on 2026-10-28: operate the property as simply as a hospitality game; make the effects of guest choice visible on rooms and work."
+    },
+    {
+      "decision": "Expand the property to a 36-room, six-floor translucent cutaway with six bed layouts, window-view colors, elevator routes, facility cues and record-driven occupant/work/maintenance animation. Add focused floors, type/status filters, pause motion and mobile horizontal floor navigation.",
+      "reason": "2026-10-28 human request: at least 30 rooms with individual spatial traits and operational state, and connected downstream work."
+    },
+    {
+      "decision": "Use actual Three.js orbit geometry, front-facing labels and focused floors; show a five-stage dependency ripple with deterministic before/after values and a separate isolated hackathon director.",
+      "reason": "Latest user request: genuinely dimensional hotel plus request/change-to-operations animation and exception-only owner intervention."
+    },
+    {
+      "decision": "Oceanfront 3D command room, source-labelled actionable inbox, persistent per-channel automation rules and reviewable outbound jobs. Immersive mode keeps requests, operations and channels in the scene dock.",
+      "reason": "2026-10-28 direct user request for coastal views, game-like recommended actions, platform automation and immersive control."
+    },
+    {
+      "decision": "Unfold both hotel wings by default, select room volumes with whole-room outlines, and use a persistent Tasks / Inbox / Rooms control desk. Replace layers with status filters; add distinct animated staff and current-KST lighting.",
+      "reason": "2026-10-29 user asks for immediately selectable rear rooms, clear vacancies, visible staff work, stable rendering and serious tycoon-like controls."
+    },
+    {
+      "decision": "Remove Open hotel; keep one compact building with all36 fixed facade room controls. Use shared graphic state symbols and physical props; fill selected room surfaces with cyan and link to its fixed icon.",
+      "reason": "Direct user correction on2026-10-29: building default, no disappearing labels or tooltip cards, visual differentiation of all operational states."
+    },
+    {
+      "decision": "Add AI Plan with joint guest alternatives, grounded recovery review, actual inference evidence and multi-room dependency routes inside the existing compact-building desk.",
+      "reason": "2026-10-29 request to connect verified Nemotron calls, multi-guest allocation, operational recovery, measurable costs and a complete 3D hackathon demo."
+    },
+    {
+      "decision": "Default Agent desk with bounded owner policy, exception-only decision cards, collapsed automatic history and explicit before/after incident reasons on the3D hotel. Preserve warm moss tokens, fixed room controls and meaningful resource routes.",
+      "reason": "2026-10-29 user requests autonomous handling of absence, linen shortages and sudden changes, with only judgment calls escalated."
+    },
+    {
+      "decision": "Preserve compact building and right control desk; add protected-current versus proposed stay comparison, explicit guest choice and date-specific operating ripples.",
+      "reason": "2026-10-29 customer-agent date, room and party changes must be understandable before and after commitment."
+    },
+    {
+      "decision": "Add a compact multi-guest coordination desk alongside owner exceptions, with visible new/change provenance, alternative combinations, per-customer selection states and aggregate3D resource routes.",
+      "reason": "2026-10-29 simultaneous customer-agent requests should be understandable without exposing routine waiting as owner work."
+    },
+    {
+      "decision": "Owner conversation plus live property context becomes the default. Calendar groups rooms by type; 3D is an optional view. Mobile toggles conversation/property; tablet keeps both.",
+      "reason": "Direct user direction 2026-10-30: off-site hospitality operations agent, simpler than the game-like control desk."
+    },
+    {
+      "decision": "Keep booking clarification, compact fact review, coordinated alternatives, explicit guest role and saved operating receipts inside owner conversation. Retain optional property/3D view.",
+      "reason": "2026-10-30 direct request: complete mobile natural-language request through customer choice and operations without legacy input-screen handoffs."
+    }
+  ],
+  "evidence": [
+    {
+      "fact": "project.instructions",
+      "source": "AGENTS.md"
+    },
+    {
+      "fact": "project.stack:react",
+      "source": "package.json"
+    },
+    {
+      "fact": "project.stack:vite",
+      "source": "package.json"
+    }
+  ],
+  "generatedAt": "2026-10-27T20:11:07.869Z"
+}

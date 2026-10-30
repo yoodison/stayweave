@@ -39,3 +39,27 @@ test('malformed provider output cannot become a valid request', async()=>{
   globalThis.fetch=async()=>({ok:true,json:async()=>({choices:[{message:{content:'not JSON'}}]})});
   await assert.rejects(interpret('Request'),/valid request details/);
 });
+
+import {interpretFit} from '../server/ai.js';
+test('guest interpretation preserves grounded requirements and preferences for review',async()=>{
+  process.env.NEBIUS_API_KEY='test-key';process.env.NEBIUS_INFERENCE_ENABLED='true';
+  globalThis.fetch=async()=>({ok:true,json:async()=>({choices:[{message:{content:JSON.stringify({claims:[{kind:'requirement',feature:'stepFree',evidence:'need step-free access'},{kind:'preference',feature:'quiet',evidence:'prefer a quiet room'}]})}}],usage:{total_tokens:50}})});
+  const result=await interpretFit('I need step-free access and prefer a quiet room.');
+  assert.deepEqual(result.claims.map(x=>[x.kind,x.feature]),[['requirement','stepFree'],['preference','quiet']]);
+});
+test('ungrounded or malformed model claims never reach a plan',async()=>{
+  process.env.NEBIUS_API_KEY='test-key';process.env.NEBIUS_INFERENCE_ENABLED='true';
+  globalThis.fetch=async()=>({ok:true,json:async()=>({choices:[{message:{content:JSON.stringify({claims:[{kind:'requirement',feature:'stepFree',evidence:'wheelchair required'}]})}}]})});
+  await assert.rejects(interpretFit('I would like a quiet room.'),/ungrounded/);
+  globalThis.fetch=async()=>({ok:true,json:async()=>({choices:[{message:{content:JSON.stringify({claims:[{kind:'requirement',feature:'pool',evidence:'quiet room'}]})}}]})});
+  await assert.rejects(interpretFit('I would like a quiet room.'),/unsupported/);
+});
+
+test('hotel interpreter supports grounded spatial features while legacy stays bounded',async()=>{
+  process.env.NEBIUS_API_KEY='test-key';process.env.NEBIUS_INFERENCE_ENABLED='true';
+  let prompt;
+  globalThis.fetch=async(_url,opts)=>{prompt=JSON.parse(opts.body).messages[0].content;return {ok:true,json:async()=>({choices:[{message:{content:JSON.stringify({claims:[{kind:'requirement',feature:'family',evidence:'need a family room'},{kind:'preference',feature:'highFloor',evidence:'prefer a high floor'}]})}}]})};};
+  const message='I need a family room and prefer a high floor.';
+  const result=await interpretFit(message,{hotel:true});assert.equal(result.claims[0].feature,'family');assert.match(prompt,/nearElevator/);assert.match(prompt,/must NOT be approximated/);
+  await assert.rejects(interpretFit(message),/unsupported/);
+});

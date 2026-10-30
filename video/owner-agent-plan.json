@@ -1,0 +1,192 @@
+{
+  "version": 1,
+  "project": {
+    "title": "StayWeave \u2014 Your hotel, wherever you are",
+    "mode": "walkthrough",
+    "audience": "Nebius and NVIDIA hackathon judges; independent hotel operators",
+    "objective": "Demonstrate owner language driving constrained, visible hotel operations",
+    "maxDuration": 175,
+    "aspectRatio": "16:9"
+  },
+  "truthSources": [
+    {
+      "id": "owner-ui",
+      "location": "http://127.0.0.1:5173/?demo=1",
+      "notes": "Observed responsive owner UI and actual model report runs, local synthetic ledger."
+    },
+    {
+      "id": "guest-flow",
+      "location": "docs/LIVE_PRESENTATION.md",
+      "notes": "Existing live guest intake and explicit selection. Rehearse again before filming."
+    },
+    {
+      "id": "owner-proof",
+      "location": "docs/evidence/owner-agent/verification.json",
+      "notes": "Actual calls, preservation checks and exact saved linen state."
+    },
+    {
+      "id": "devices",
+      "location": "http://127.0.0.1:5173/devices.html",
+      "notes": "Real responsive app in illustrative frames; not a deployed or native app."
+    }
+  ],
+  "audio": {
+    "mode": "voiceover",
+    "status": "Script only; human narration not recorded"
+  },
+  "scenes": [
+    {
+      "id": "opening",
+      "purpose": "context",
+      "duration": 10,
+      "source": {
+        "type": "live-capture",
+        "truthStatus": "observed",
+        "truthSourceId": "owner-ui"
+      },
+      "captureStatus": "planned; not final recorded footage",
+      "visual": "Owner away from the desk; show actual phone-sized composer.",
+      "action": "Open the app; keep pending work visible.",
+      "proof": "Observed responsive owner UI and actual model report runs, local synthetic ledger.",
+      "copy": {
+        "voiceover": "A host should not need to be at the front desk to keep the hotel moving. This is StayWeave."
+      }
+    },
+    {
+      "id": "request",
+      "purpose": "workflow",
+      "duration": 22,
+      "source": {
+        "type": "live-capture",
+        "truthStatus": "observed",
+        "truthSourceId": "owner-ui"
+      },
+      "captureStatus": "planned; not final recorded footage",
+      "visual": "Enter one staff report in chat.",
+      "action": "Type a currently valid synthetic operating report; submit once.",
+      "proof": "Observed responsive owner UI and actual model report runs, local synthetic ledger.",
+      "copy": {
+        "voiceover": "Tell StayWeave what changed. Nemotron, running through Nebius Token Factory, interprets the report and selects the operating tool. The model does not invent availability or staff capacity."
+      }
+    },
+    {
+      "id": "plan",
+      "purpose": "workflow",
+      "duration": 23,
+      "source": {
+        "type": "live-capture",
+        "truthStatus": "observed",
+        "truthSourceId": "owner-ui"
+      },
+      "captureStatus": "planned; not final recorded footage",
+      "visual": "Show exact task or resource changes and owner limits.",
+      "action": "Open interpreted report; inspect plan; record the verified report.",
+      "proof": "Observed responsive owner UI and actual model report runs, local synthetic ledger.",
+      "copy": {
+        "voiceover": "The operating engine checks existing work, confirmed stays and the owner\u2019s limits. You see what would change before the report is recorded. Feasible recovery can then run inside those limits."
+      }
+    },
+    {
+      "id": "exception",
+      "purpose": "outcome",
+      "duration": 20,
+      "source": {
+        "type": "live-capture",
+        "truthStatus": "observed",
+        "truthSourceId": "owner-proof"
+      },
+      "captureStatus": "planned; not final recorded footage",
+      "visual": "Show saved automatic result beside genuine handover exception.",
+      "action": "Show recorded linen increase and Jules handover; do not falsely complete active work.",
+      "proof": "Actual calls, preservation checks and exact saved linen state.",
+      "copy": {
+        "voiceover": "The linen count is saved and read back. An absent inspector already has work in progress, so StayWeave asks for a real handover. Automation stops where the facts or permission stop."
+      }
+    },
+    {
+      "id": "guests",
+      "purpose": "workflow",
+      "duration": 32,
+      "source": {
+        "type": "live-capture",
+        "truthStatus": "observed",
+        "truthSourceId": "guest-flow"
+      },
+      "captureStatus": "planned; not final recorded footage",
+      "visual": "Two guest requests; hard sea requirement versus preference.",
+      "action": "Use existing guest intake and joint coordination; guests explicitly choose their own options.",
+      "proof": "Existing live guest intake and explicit selection. Rehearse again before filming.",
+      "copy": {
+        "voiceover": "The same operating state also serves your guests. Natural-language needs become required conditions and preferences. Requests are considered together. Existing bookings stay protected, and each guest reviews and chooses their own stay."
+      }
+    },
+    {
+      "id": "operations",
+      "purpose": "outcome",
+      "duration": 20,
+      "source": {
+        "type": "live-capture",
+        "truthStatus": "observed",
+        "truthSourceId": "guest-flow"
+      },
+      "captureStatus": "planned; not final recorded footage",
+      "visual": "Show saved booking and actual changed breakfast/preparation.",
+      "action": "Open chosen stay impact; show only changed values.",
+      "proof": "Existing live guest intake and explicit selection. Rehearse again before filming.",
+      "copy": {
+        "voiceover": "A guest\u2019s choice becomes a reservation and a connected operating plan. Breakfast follows the stay dates. Cleaning and linen are added only when preparation is needed. A ready room does not create imaginary work."
+      }
+    },
+    {
+      "id": "devices",
+      "purpose": "workflow",
+      "duration": 15,
+      "source": {
+        "type": "live-capture",
+        "truthStatus": "observed",
+        "truthSourceId": "devices"
+      },
+      "captureStatus": "planned; not final recorded footage",
+      "visual": "Tablet calendar and phone chat side by side.",
+      "action": "Interact with actual iframe app; use no animated mock results.",
+      "proof": "Real responsive app in illustrative frames; not a deployed or native app.",
+      "copy": {
+        "voiceover": "On a phone, the host can use the conversation. On a tablet, the same records become a room calendar or a spatial view. These are responsive local app views."
+      }
+    },
+    {
+      "id": "evidence",
+      "purpose": "outcome",
+      "duration": 15,
+      "source": {
+        "type": "live-capture",
+        "truthStatus": "observed",
+        "truthSourceId": "owner-proof"
+      },
+      "captureStatus": "planned; not final recorded footage",
+      "visual": "Expand actual model, latency and estimated-cost evidence.",
+      "action": "Open per-request evidence; distinguish estimate from billed spend.",
+      "proof": "Actual calls, preservation checks and exact saved linen state.",
+      "copy": {
+        "voiceover": "Every model call exposes its measured latency and estimated token cost. Nebius inference is live. Reservations and operations are saved locally; external booking platforms and payments are not connected."
+      }
+    },
+    {
+      "id": "close",
+      "purpose": "outcome",
+      "duration": 8,
+      "source": {
+        "type": "live-capture",
+        "truthStatus": "observed",
+        "truthSourceId": "owner-ui"
+      },
+      "captureStatus": "planned; not final recorded footage",
+      "visual": "Return to real owner workspace.",
+      "action": "Hold the working product, not an invented growth metric.",
+      "proof": "Observed responsive owner UI and actual model report runs, local synthetic ledger.",
+      "copy": {
+        "voiceover": "StayWeave. The operating partner for a host who cannot always be at the desk."
+      }
+    }
+  ]
+}

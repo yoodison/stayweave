@@ -1,0 +1,12 @@
+{
+  "source": "recording.mp4",
+  "durationFrames": 300,
+  "caption": "Recorded local demo · edited camera framing",
+  "keys": [
+    {"frame":0,"scale":1,"x":0.5,"y":0.5},
+    {"frame":75,"scale":1,"x":0.5,"y":0.5},
+    {"frame":108,"scale":1.35,"x":0.78,"y":0.48},
+    {"frame":225,"scale":1.35,"x":0.78,"y":0.48},
+    {"frame":270,"scale":1,"x":0.5,"y":0.5}
+  ]
+}

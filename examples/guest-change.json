@@ -1,0 +1,11 @@
+{
+  "message": "I would prefer a sea view.",
+  "checkIn": "2026-11-01",
+  "checkOut": "2026-11-04",
+  "party": 3,
+  "breakfast": 3,
+  "arrival": 900,
+  "latest": 1020,
+  "requirementsMode": "preserve",
+  "spatial": {}
+}

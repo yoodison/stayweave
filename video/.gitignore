@@ -1,0 +1,10 @@
+node_modules/
+renders/
+raw/
+audio/
+public/*.mp4
+public/*.wav
+public/*.mov
+public/*.mp3
+
+public/assembly-*/

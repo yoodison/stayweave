@@ -1,0 +1,18 @@
+{
+  "name": "stayweave-video",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "studio": "remotion studio src/index.jsx",
+    "motion": "remotion render src/index.jsx StayWeaveFlow renders/flow.mp4",
+    "still": "remotion still src/index.jsx StayWeaveFlow renders/flow.png --frame=150",
+    "editorial": "remotion render src/index.jsx StayWeaveEditorial renders/editorial-v1.mp4",
+    "editorial:still": "remotion still src/index.jsx StayWeaveEditorial renders/editorial-v1.png --frame=120"
+  },
+  "dependencies": {
+    "remotion": "4.0.539",
+    "@remotion/cli": "4.0.539",
+    "react": "19.2.0",
+    "react-dom": "19.2.0"
+  }
+}
