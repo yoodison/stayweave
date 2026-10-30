@@ -1,3 +1,66 @@
+# StayWeave — run your hotel, just ask
+
+**Agent-native operations for independent hotels.** An owner (or a guest's own agent) describes what is needed in plain language. **NVIDIA Nemotron on Nebius Token Factory** interprets it; deterministic code coordinates rooms, housekeeping, linen, breakfast and staff; guests explicitly choose; the reservation and its operating plan are saved and read back together.
+
+Nebius × NVIDIA Global AI Hackathon · **Best Apps and Agents** track · MIT license
+
+| | |
+|---|---|
+| Live demo (judges) | https://audit-nursing-charging-rica.trycloudflare.com/?demo=1 — see availability note below |
+| Demo video | YouTube link in the Devpost submission (2:40) |
+| Model | `nvidia/Nemotron-3.5-Super-VL` via Nebius Token Factory (OpenAI-compatible API) |
+
+## How NVIDIA Nemotron and Nebius Token Factory are used
+
+```
+Owner chat / guest agent (REST)          ── natural language ──▶  Nemotron 3.5 Super (Nebius Token Factory)
+                                                                  structured JSON: guests, dates, party, arrival,
+                                                                  breakfast, REQUIRED vs PREFERRED needs + quoted evidence
+                                          ◀── validated claims ──
+Deterministic planner (server/coordination.js, matching.js, owner-booking.js)
+  · evidence substrings checked, unknown rooms/dates rejected, missing fields asked (max 2 at a time)
+  · joint allocation of several pending requests; confirmed stays and purchased rights never displaced
+  · capacity checks: housekeeping minutes, team roster, free linen sets, breakfast covers
+Guest explicitly chooses current terms ──▶ atomic ledger write: reservation + cleaning/linen/breakfast/roster ──▶ read back
+```
+
+- **Model role (server/ai.js, server/owner-agent.js, server/owner-booking.js):** intent and condition extraction, tool classification, clarifying-question content. The model never creates inventory, prices, approvals or completion.
+- **Every call is metered in the UI:** model ID, latency, prompt/completion tokens and estimated cost per call. A cumulative inference budget guard stops calls when exceeded; failed or invalid extractions never touch the ledger.
+- **Why Token Factory:** a hosted NVIDIA open model with an OpenAI-compatible endpoint let a two-person-scale project use a strong reasoning model without operating GPU serving.
+
+## Try it (judges)
+
+1. Open the demo URL above (`/?demo=1` is an isolated demo hotel; it does not touch other data).
+2. In the left chat, type e.g. *“Priya Nair wants Nov 18 to 20, two guests. A sea view is a must. Marco Lee, same dates, one guest, would like a quiet room if possible.”*
+3. StayWeave asks only for missing details (arrival, breakfast). Answer in plain words, then **Confirm details & find coordinated options**.
+4. Use **Demo · act as <guest>** to make each simulated guest's explicit choice, then see the saved operating changes in chat, **Calendar** and **3D hotel**.
+5. Other operating reports work too: *“Jules is absent today”*, *“We have 8 clean linen sets in total”*.
+
+If no room satisfies every required constraint, the planner says so rather than inventing an offer. Demo data is synthetic. OTA/PMS write-back, payments and outbound messages are **not** connected (channel adapters are simulated).
+
+**Availability note:** the demo is served from the author's machine through a Cloudflare tunnel; if it is unreachable, run it locally as below (about two minutes).
+
+## Run locally
+
+Requires Node.js 22.12+.
+
+```sh
+npm install
+cp .env.example .env            # add your own NEBIUS_API_KEY; set NEBIUS_INFERENCE_ENABLED=true
+npm run build && npm start      # http://127.0.0.1:3001/?demo=1
+# or: npm run dev               # http://127.0.0.1:5173/?demo=1 (Vite + API)
+npm test                        # 119 tests
+```
+
+Without a key the app still runs; the chat reports that the model is disconnected. To expose a local server through a Cloudflare quick tunnel, start it with `STAYWEAVE_PUBLIC_HOST_SUFFIX=.trycloudflare.com` (otherwise only localhost requests are accepted).
+
+## Built during the submission period
+
+The repository's first commit is 2026-10-28, inside the submission period (Aug 26 – Oct 30, 2026). Earlier university coursework research on hotel operations informed the problem framing; it is not part of this codebase.
+
+---
+
+## Development log
 ## Product requirements
 
 Start with [StayWeave PRD v1.0](docs/PRD.md) for the consolidated owner-agent product, conversational journeys, scope, acceptance criteria, metrics and roadmap. It distinguishes local implementation from production requirements and business hypotheses. The dated sections below retain implementation history.
